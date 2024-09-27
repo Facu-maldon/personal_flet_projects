@@ -2,6 +2,12 @@ import flet as ft
     
 async def main(page: ft.Page):
 
+    def buttons(text, bgndcolor, textcolor, btnheight, btnwidth):
+        return ft.TextButton(text=text,
+                height=btnheight,
+                width=btnwidth,
+                style=ft.ButtonStyle(bgcolor=bgndcolor, color=textcolor))
+    
     page.bgcolor = ft.colors.BLACK
     page.vertical_alignment = ft.CrossAxisAlignment.CENTER
     page.horizontal_alignment = ft.MainAxisAlignment.CENTER
@@ -23,89 +29,41 @@ async def main(page: ft.Page):
     
     keys.controls.append(
         ft.Row([
-            ft.TextButton(text="1",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
-            ft.TextButton(text="2",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
-            ft.TextButton(text="3",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
-            ft.TextButton(text="+",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
+            buttons("1",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
+            buttons("2",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
+            buttons("3",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
+            buttons("+",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
                 ],
-
-    ))
+            width=keys.width,
+            alignment=ft.MainAxisAlignment.CENTER
+        ))
 
     keys.controls.append(
         ft.Row([
-            ft.TextButton(text="4",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
-            ft.TextButton(text="5",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
-            ft.TextButton(text="6",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
-            ft.TextButton(text="-",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
+            buttons("4",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
+            buttons("5",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
+            buttons("6",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
+            buttons("-",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
                 ],
                 )
         )
 
     keys.controls.append(
         ft.Row([
-            ft.TextButton(text="7",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
-            ft.TextButton(text="8",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
-            ft.TextButton(text="9",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
-            ft.TextButton(text="*",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
+            buttons("7",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
+            buttons("8",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
+            buttons("9",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
+            buttons("*",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
                 ], 
             ))
 
     keys.controls.append(
         ft.Row([
-            ft.TextButton(text="AC",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
-            ft.TextButton(text="0",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
-            ft.TextButton(text="=",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
-            ft.TextButton(text="/",
-                        height=keys.height/7,
-                        width=keys.width/4.5,
-                        style=ft.ButtonStyle(bgcolor=ft.colors.WHITE)),
-                ],
-                alignment=ft.MainAxisAlignment.CENTER))
+            buttons("AC",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
+            buttons("0",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
+            buttons("=",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
+            buttons("/",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5),
+                ]))
     
 
     page.add(mainStack)
