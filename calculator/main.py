@@ -14,6 +14,16 @@ async def main(page: ft.Page):
     global operations
     operations = []
 
+    def do_operation():
+        global total_operation
+        global result
+        result = eval(total_operation)
+        total_operation = f"{result}"
+        print(result)
+
+        screen.value = result
+        page.update()
+        
     def buttons(value, bgndcolor, textcolor, btnheight, btnwidth):
         return ft.TextButton(text=value,
                 height=btnheight,
@@ -22,7 +32,6 @@ async def main(page: ft.Page):
                 data=value,
                 on_click=keyPress)
 
-    
     page.bgcolor = ft.colors.BLACK
     page.vertical_alignment = ft.CrossAxisAlignment.CENTER
     page.horizontal_alignment = ft.MainAxisAlignment.CENTER
@@ -38,30 +47,33 @@ async def main(page: ft.Page):
             int(value)
             global total_operation
             total_operation = f"{total_operation}{value}"
-            screen.value = total_operation
         except:
             if total_operation[-1] == "+" or total_operation[-1] == "-" or total_operation[-1] == "*" or total_operation[-1] == "/":
                 return 0
-
-            total_operation = f"{total_operation}{value}"
             
             if value == "+":
                 operations.append("+")
+                total_operation = f"{total_operation}{value}"
 
             elif value == "-":
                 operations.append("-")
+                total_operation = f"{total_operation}{value}"
 
             elif value == "*":
                 operations.append("*")
+                total_operation = f"{total_operation}{value}"
 
             elif value == "/":
                 operations.append("/")
+                total_operation = f"{total_operation}{value}"
 
-                print(operations)
-
+            elif value == "=":
+                do_operation()
+            
             else:
-                do_operation(operation)
+                total_operation = ""
         
+        screen.value = total_operation
         page.update()
 
     keys = ft.GridView(
