@@ -4,27 +4,9 @@ async def main(page: ft.Page):
 
     global total_operation
     total_operation = ""
-
-    global current_number
-    current_number = 0
-
-    global numbers
-    numbers = []
-
-    global operations
-    operations = []
-
-    def do_operation():
-        global total_operation
-        global result
-        result = eval(total_operation)
-        total_operation = f"{result}"
-        print(result)
-
-        screen.value = result
-        page.update()
         
     def buttons(value, bgndcolor, textcolor, btnheight, btnwidth):
+
         return ft.TextButton(text=value,
                 height=btnheight,
                 width=btnwidth,
@@ -35,10 +17,10 @@ async def main(page: ft.Page):
     page.bgcolor = ft.colors.BLACK
     page.vertical_alignment = ft.CrossAxisAlignment.CENTER
     page.horizontal_alignment = ft.MainAxisAlignment.CENTER
-    page.window_height = 500
-    page.window_width = 400
+    page.window.height = 500
+    page.window.width = 400
     page.title = "Calculator"
-    page.window_center()
+    page.window.center()
 
     def keyPress(a):
 
@@ -52,23 +34,20 @@ async def main(page: ft.Page):
                 return 0
             
             if value == "+":
-                operations.append("+")
                 total_operation = f"{total_operation}{value}"
 
             elif value == "-":
-                operations.append("-")
                 total_operation = f"{total_operation}{value}"
 
             elif value == "*":
-                operations.append("*")
                 total_operation = f"{total_operation}{value}"
 
             elif value == "/":
-                operations.append("/")
                 total_operation = f"{total_operation}{value}"
 
             elif value == "=":
-                do_operation()
+                total_operation = f"{eval(total_operation)}"
+                page.update()
             
             else:
                 total_operation = ""
@@ -79,24 +58,21 @@ async def main(page: ft.Page):
     keys = ft.GridView(
         runs_count=4,
         height=page.window.height*60/100,
-        width=page.window_width,
+        width=page.window.width,
         child_aspect_ratio=1.8,
     )
     
     screen = ft.TextField(read_only=True,
                           value=total_operation,
                           height=page.window.height*20/100,
-                          width=page.window_width,
+                          width=page.window.width,
                           color=ft.colors.WHITE)
     
     mainColumn = ft.Column(
-        [
-            screen,
-            ft.Container(keys, alignment=ft.alignment.bottom_center),
-        ],
+        [screen, ft.Container(keys, alignment=ft.alignment.bottom_center)],
         alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-        height=page.window_height,
-        width=page.window_width
+        height=page.window.height,
+        width=page.window.width
     )
     
     keys.controls.append(buttons("1",ft.colors.WHITE, ft.colors.BLACK, keys.height/7, keys.width/4.5))
