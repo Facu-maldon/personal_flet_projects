@@ -1,7 +1,20 @@
 import pandas as pd
+import flet as ft
+import os
 
 
 def formatearExcelATxt(archivoOrigen):
+
+    archivoOrigen = archivoOrigen.control.data
+
+    txt = open(f"{archivoOrigen.split("/")[-1]}.txt", "w")
+
+    txt = open(f"{archivoOrigen.split("/")[-1]}.txt", "a")
+
+    if not archivoOrigen:
+        print("Archivo no seleccionado")
+        return 3
+
     dataFrame = pd.read_excel(archivoOrigen)
     dataFrame = dataFrame.head(len(dataFrame))
 
@@ -17,8 +30,8 @@ def formatearExcelATxt(archivoOrigen):
         
         contador_longitudes = 0
         linea = ""
-        if len(dataFrame["Numero de documento"][i]) != 8:
-            print(f"Número de documento de la columna {i} incorrecto(escribirlo sin puntos y revisar error en la escritura)")
+        if len(str(dataFrame["Numero de documento"][i])) != 8:
+            print(f"Número de documento de la columna {i+1} incorrecto(escribirlo sin puntos y revisar error en la escritura)")
             return 1
         
         for dato in datos:
@@ -39,9 +52,10 @@ def formatearExcelATxt(archivoOrigen):
                     dato = f"{dato}{" "*faltantes}"
 
             linea = f"{linea}{dato}"
-            contador_longitudes += 1
-            
+            contador_longitudes += 1         
 
         linea = f"{linea}\n"
+        txt.write(linea)
 
+    txt.close()
 
